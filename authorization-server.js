@@ -56,14 +56,15 @@ Your code here
 app.get("/authorize", (req, res) => {
   const clientId = req.query["client_id"];
 
-  if (clientId && !clients[clientId]) {
+  if (!clientId || !clients[clientId]) {
     res.status(401).end();
     return;
   }
 
-  const requestScopes = req.query?.scope?.split(" ") || [];
+  const requestScopes = req.query.scope.split(" ");
+  const clientScopes = clients[clientId].scopes;
 
-  if (!containsAll(clients[clientId]?.scopes, requestScopes)) {
+  if (!containsAll(clientScopes, requestScopes)) {
     res.status(401).end();
     return;
   }
