@@ -73,7 +73,7 @@ app.get("/authorize", (req, res) => {
 
   res.status(200).render("login", {
     client: clients[clientId],
-    scope: req.query.scopes,
+    scope: req.query.scope,
     requestId,
   });
 });
