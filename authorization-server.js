@@ -63,7 +63,7 @@ app.get("/authorize", (req, res) => {
 
   const requestScopes = req.query?.scope?.split(" ") || [];
 
-  if (!containsAll(clients[clientId].scopes, requestScopes)) {
+  if (!containsAll(clients[clientId]?.scopes, requestScopes)) {
     res.status(401).end();
     return;
   }
